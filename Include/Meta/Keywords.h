@@ -18,6 +18,9 @@
 #   endif
 #endif
 
+/// __unused
+/// Instead of use ((void*)X) idiom, we should make an 'prebuilt' operator
+/// to clear out what it do, power the readability
 #ifndef __unused
 #define __unused(variable) ((void*)(variable))
 #endif
