@@ -1,5 +1,11 @@
-local function filedirs(directory)
-
+local function filedirs(dirs)
+    for _, directory in ipairs(dirs) do
+        files {
+            path.join(directory, "*.h"),
+            path.join(directory, "*.c"),
+            path.join(directory, "*.cpp"),
+        }
+    end
 end
 
 return {
@@ -9,7 +15,7 @@ return {
            return           
         end
 
-        filters { "action:vs*"}
+        filter { "action:vs*"}
         do
             links {
                      
@@ -18,23 +24,27 @@ return {
     end,
 
     files = function (directory, config)
+        config = config or {}
         if config.NonNative then
             return
         end
 
-        files {
-            path.join(directory, "src/Memory/GeneralAllocation.c")
+        filedirs {
+            path.join(directory, "Include/**"),
+            
+            path.join(directory, "Source/Memory"),
+            path.join(directory, "Source/Misc"),
         }
 
-        filters { "actions:vs*" }
+        filter { "action:vs*" }
         do
             filedirs {
-                path.join(directory, "src/Windows/Threading"),
+                path.join(directory, "Source/Windows/Threading"),
             }
         end
     end,
 
     includedirs = function (directory)
-        includedirs { path.join(directory, "include") }
+        includedirs { path.join(directory, "Include") }
     end
 }

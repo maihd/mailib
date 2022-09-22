@@ -1,9 +1,10 @@
 #pragma once
 
 #include <stdint.h>
+#include <Meta/Platforms.h>
 
 // Check support platform
-#if !defined(_WIN32) || !defined(__linux__) || !defined(__darwin__)
+#ifndef PLATFORM_HOSTED
 #error Target platform does not support general memory allocations
 #endif
 
