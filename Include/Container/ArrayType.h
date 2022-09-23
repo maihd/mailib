@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include <Memory/Allocator.h>
+#include <Memory/Allocations.h>
 
 template <typename T>
 struct Array
@@ -9,7 +9,7 @@ struct Array
     int32_t         count;
     int32_t         capacity;
     Allocator*      allocator;
-    T[]             elements;
+    T				elements[];
 };
 
 //! LEAVE AN EMPTY LINE HERE, REQUIRE BY GCC/G++

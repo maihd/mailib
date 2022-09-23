@@ -42,7 +42,7 @@ int Testing_RunAllCases(const char* argv[], int argc)
         assert(testCase->file != nullptr);
         assert(testCase->line > 0);
 
-        printf("[Testing] Start run test %s at %s:%d", testCase->name, testCase->file, testCase->line);
+        printf("[Testing] Start run test %s at %s:%d\n", testCase->name, testCase->file, testCase->line);
         testCase->func();
 
         testCase = testCase->next;
@@ -51,7 +51,7 @@ int Testing_RunAllCases(const char* argv[], int argc)
         testSuccess++;
     }
 
-    printf("[Testing] Run all %d cases, success %d cases", testCount, testSuccess);
+    printf("[Testing] Run all %d cases, success %d cases\n", testCount, testSuccess);
 
     return 0;
 }

@@ -17,12 +17,12 @@ static void GeneralAllocator_Free(Allocator* allocator, void* block)
     return Memory_GeneralFree(block);
 }
 
-struct Allocator gAllocator = {
+static Allocator gAllocator = {
       GeneralAllocator_Allocate,
       GeneralAllocator_Free
 };
 
-struct Allocator* Memory_GetGeneralAllocator(void)
+Allocator* Memory_GetGeneralAllocator(void)
 {
     return &gAllocator;
 }
@@ -30,7 +30,7 @@ struct Allocator* Memory_GetGeneralAllocator(void)
 uint8_t* Memory_GeneralAllocate(void* oldBlock, int32_t size, int32_t alignment)
 {
     assert(size == 0 || (size > 0 && alignment > 0));
-    return (uint8_t)_aligned_realloc(oldBlock, size, alignment);
+    return (uint8_t*)_aligned_realloc(oldBlock, size, alignment);
 }
 
 void Memory_GeneralFree(void* block)

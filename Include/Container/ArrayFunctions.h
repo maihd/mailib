@@ -7,10 +7,14 @@
 template <typename T>
 inline Array<T>* Array_New(Allocator* allocator, int32_t capacity)
 {
-    Array<T>* array     = (Array<T>*)Memory_Allocate(allocator, capacity * sizeof(T), alignof(T));
-    array->count        = 0;
-    array->capacity     = capacity;
-    array->allocator    = allocator;
+    Array<T>* array = (Array<T>*)Memory_Allocate(allocator, nullptr, sizeof(Array<T>) + capacity * sizeof(T), alignof(T));
+	if (array != nullptr)
+	{
+		array->count		= 0;
+		array->capacity		= capacity;
+		array->allocator	= allocator;
+	}
+
     return array;
 }
 
