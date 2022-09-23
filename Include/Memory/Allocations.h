@@ -15,6 +15,11 @@ struct Allocator
     AllocatorFreeFn*        freeFn;
 };
 
+/// Allocate a memory block
+/// @param: allocator
+/// @param: oldBlock - block you want to resize
+/// @param: size - size of memory block
+/// @param: alignment - Address alignment for cache-friendly, fast processing
 inline uint8_t* Memory_Allocate(Allocator* allocator, void* oldBlock, int32_t size, int32_t alignment)
 {
     assert(allocator != nullptr);
@@ -22,6 +27,9 @@ inline uint8_t* Memory_Allocate(Allocator* allocator, void* oldBlock, int32_t si
     return allocator->allocateFn(allocator, oldBlock, size, alignment);
 }
 
+/// Allocate a memory block
+/// @param: allocator
+/// @param: block
 inline void Memory_Free(Allocator* allocator, void* block)
 {
     assert(allocator != nullptr);
