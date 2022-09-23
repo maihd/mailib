@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <Memory/Allocations.h>
 
+#pragma warning(disable : 4200)
 template <typename T>
 struct Array
 {

@@ -17,6 +17,25 @@ do
     location (path.join(BUILD_DIR, _ACTION:upper()))
 
     configurations { "Debug", "Release" }
+    platforms { "x32", "x64" }
+
+    flags {
+        "NoPCH",
+        "NoRuntimeChecks",
+        "ShadowedVariables",
+        "LinkTimeOptimization",
+
+        --"FatalWarnings",
+        --"FatalLinkWarnings",
+        "FatalCompileWarnings",
+    }
+
+    cppdialect "C++11"
+    staticruntime "On"
+    omitframepointer "On"
+
+    rtti "Off"
+    exceptionhandling "Off"
 
     filter {}
 end

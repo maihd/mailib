@@ -11,36 +11,34 @@ end
 return {
     links = function (config)
         config = config or {}
-        if config.NonNative then
-           return           
-        end
-
-        filter { "action:vs*"}
-        do
-            links {
-                     
-            } 
+        if not config.NoThreading then
+            filter { "action:vs*"}
+            do
+                links {
+                        
+                } 
+            end         
         end
     end,
 
     files = function (directory, config)
         config = config or {}
-        if config.NonNative then
-            return
-        end
 
         filedirs {
             path.join(directory, "Include/**"),
-            
+
             path.join(directory, "Source/Memory"),
             path.join(directory, "Source/Misc"),
         }
 
-        filter { "action:vs*" }
-        do
-            filedirs {
-                path.join(directory, "Source/Windows/Threading"),
-            }
+        if not config.NoThreading then
+            filter { "action:vs*" }
+            do
+                filedirs {
+                    path.join(directory, "Source/Threading"),
+                    path.join(directory, "Source/Threading/Windows"),
+                }
+            end
         end
     end,
 

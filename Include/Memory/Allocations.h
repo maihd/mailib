@@ -26,7 +26,7 @@ inline void Memory_Free(Allocator* allocator, void* block)
 {
     assert(allocator != nullptr);
     assert(block != nullptr && "Bad behaviour: attempt to free nullptr");
-    return allocator->freeFn(allocator, block);
+    allocator->freeFn(allocator, block);
 }
 
 //! LEAVE AN EMPTY LINE HERE, REQUIRE BY GCC/G++

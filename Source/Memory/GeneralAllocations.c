@@ -14,7 +14,7 @@ static uint8_t* GeneralAllocator_Allocate(Allocator* allocator, void* oldBlock, 
 static void GeneralAllocator_Free(Allocator* allocator, void* block)
 {
     __unused(allocator);
-    return Memory_GeneralFree(block);
+    Memory_GeneralFree(block);
 }
 
 static Allocator gAllocator = {
