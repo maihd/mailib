@@ -1,3 +1,5 @@
+local MaiLib = require("premake5.mailib")
+
 local ROOT_DIR = path.getabsolute(".")
 local BUILD_DIR = path.join(ROOT_DIR, "Projects")
 
@@ -19,23 +21,7 @@ do
     configurations { "Debug", "Release" }
     platforms { "x32", "x64" }
 
-    flags {
-        "NoPCH",
-        "NoRuntimeChecks",
-        "ShadowedVariables",
-        "LinkTimeOptimization",
-
-        --"FatalWarnings",
-        --"FatalLinkWarnings",
-        "FatalCompileWarnings",
-    }
-
-    cppdialect "C++11"
-    staticruntime "On"
-    omitframepointer "On"
-
-    rtti "Off"
-    exceptionhandling "Off"
+    MaiLib.cflags();
 
     filter {}
 end
@@ -45,7 +31,6 @@ do
     kind "ConsoleApp"
 
     -- Add MaiLib files
-    local MaiLib = require("premake5.mailib")
     MaiLib.files(ROOT_DIR)
     MaiLib.links(ROOT_DIR)
     MaiLib.includedirs(ROOT_DIR)

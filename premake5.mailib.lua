@@ -9,6 +9,26 @@ local function filedirs(dirs)
 end
 
 return {
+    cflags = function ()
+        flags {
+            "NoPCH",
+            "NoRuntimeChecks",
+            "ShadowedVariables",
+            "LinkTimeOptimization",
+    
+            --"FatalWarnings",
+            --"FatalLinkWarnings",
+            "FatalCompileWarnings",
+        }
+    
+        cppdialect "C++11"
+        staticruntime "On"
+        omitframepointer "On"
+    
+        rtti "Off"
+        exceptionhandling "Off"
+    end,
+
     links = function (config)
         config = config or {}
         if not config.NoThreading then
