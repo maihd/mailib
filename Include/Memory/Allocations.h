@@ -11,8 +11,8 @@ typedef void        AllocatorFreeFn(Allocator* allocator, void* block);
 
 struct Allocator
 {
-    AllocatorAllocateFn     allocateFn;
-    AllocatorFreeFn         freeFn;
+    AllocatorAllocateFn*    allocateFn;
+    AllocatorFreeFn*        freeFn;
 };
 
 inline uint8_t* Memory_Allocate(Allocator* allocator, void* oldBlock, int32_t size, int32_t alignment)
@@ -26,7 +26,7 @@ inline void Memory_Free(Allocator* allocator, void* block)
 {
     assert(allocator != nullptr);
     assert(block != nullptr && "Bad behaviour: attempt to free nullptr");
-    return allocator->free(allocator, oldBlock, size, aligment);
+    return allocator->freeFn(allocator, block);
 }
 
 //! LEAVE AN EMPTY LINE HERE, REQUIRE BY GCC/G++
