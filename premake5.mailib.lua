@@ -52,13 +52,33 @@ return {
         }
 
         if not config.NoThreading then
+            filedirs {
+                path.join(directory, "Source/Threading"),
+            }
+
             filter { "action:vs*" }
             do
                 filedirs {
-                    path.join(directory, "Source/Threading"),
                     path.join(directory, "Source/Threading/Windows"),
                 }
             end
+
+            filter {}
+        end
+
+        if not config.NoFileSystem then
+            filedirs {
+                path.join(directory, "Source/FileSystem"),
+            }
+
+            filter { "action:vs*" }
+            do
+                filedirs {
+                    path.join(directory, "Source/FileSystem/Windows"),
+                }
+            end
+
+            filter {}
         end
     end,
 
