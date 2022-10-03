@@ -2,7 +2,7 @@
 
 #include <assert.h>
 #include <Memory/Allocations.h>
-#include <Container/ArrayType.h>
+#include <Container/ArrayTypes.h>
 
 template <typename T>
 inline Array<T>* Array_New(Allocator* allocator, int32_t capacity)
