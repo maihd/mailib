@@ -83,8 +83,8 @@ bool            FileSystem_GetExistsPath(char* buffer, int32_t length, const cha
 //bool            FileSystem_GetAbsolutePath(char* buffer, int32_t length, const char* path);
 //bool            FileSystem_GetRelativePath(char* buffer, int32_t length, const char* path);
 
-bool            FileSystem_LoadZipFile(const char* path);
-bool            FileSystem_UnloadZipFile(const char* path);
+//bool            FileSystem_LoadZipFile(const char* path);
+//bool            FileSystem_UnloadZipFile(const char* path);
 
 #ifdef __cplusplus
 }
@@ -97,6 +97,9 @@ bool            FileSystem_UnloadZipFile(const char* path);
 // -------------------------------------------------------------
 // FileStream functions
 // -------------------------------------------------------------
+
+bool FileStream_OpenFile(FileStream* stream, const char* path, FileMode mode);
+bool FileStream_FromMemory(FileStream* stream, void* buffer, int32_t bufferSize);
 
 inline bool FileStream_Close(FileStream* stream)
 {
