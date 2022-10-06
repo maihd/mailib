@@ -49,6 +49,7 @@ return {
 
             path.join(directory, "Source/Memory"),
             path.join(directory, "Source/Misc"),
+            path.join(directory, "Source/Text"),
         }
 
         if not config.NoThreading then
