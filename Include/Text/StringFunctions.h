@@ -20,6 +20,8 @@ const char*             String_FormatBuffer(void* buffer, int32_t bufferSize, co
 const char*             String_FormatBufferArgv(void* buffer, int32_t bufferSize, const char* format, va_list argv);
 
 int32_t                 String_Length(const char* target);
+int32_t                 String_CalcLength(const char* target);
+
 const StringBuffer*     String_GetBuffer(const char* target);
 
 bool                    String_IsHeap(const char* target);
@@ -71,7 +73,7 @@ inline int32_t String_Length(const char* target)
     }
     else
     {
-        return (int)strlen(target);
+        return String_CalcLength(target);
     }
 }
 

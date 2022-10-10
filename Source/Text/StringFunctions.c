@@ -143,4 +143,10 @@ const char* String_FormatBufferArgv(void* buffer, int32_t bufferSize, const char
     return stringBuffer->data;
 }
 
+int32_t String_CalcLength(const char* target)
+{
+    assert(target != nullptr && "Attempt to use null-pointer on target");
+    return (int32_t)strlen(target);
+}
+
 //! LEAVE AN EMPTY LINE HERE, REQUIRE BY GCC/G++
