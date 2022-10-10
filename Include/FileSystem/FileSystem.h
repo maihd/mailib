@@ -46,7 +46,7 @@ typedef struct FileStream
     FileInterface*      inteface;
     union
     {
-        void*           handle;
+        uintptr_t       handle;
         MemoryStream    memory;
     };
 } FileStream;
