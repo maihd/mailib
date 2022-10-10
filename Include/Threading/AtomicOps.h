@@ -8,8 +8,8 @@
 #       define Atomic_AddI32(variable, value)   __atomic_add_fetch(&(variable), value, __ATOMIC_RELAXED)
 #       define Atomic_SubI32(variable, value)   __atomic_sub_fetch(&(variable), value, __ATOMIC_RELAXED)
 #   else
-#       define Atomic_GetI32(variable)          __sync_fetch_and_add(&(variable), 0)
-#       define Atomic_SetI32(variable, value)   __sync_fetch_and_add(&(variable), Atomic_GetI32(variable) - (value))
+#       define Atomic_GetI32(variable)          ({ __sync_synchronize(); int32_t result = (variable); __sync_synchronize(); result; })
+#       define Atomic_SetI32(variable, value)   ({ __sync_synchronize(); (variable) = value; __sync_synchronize(); (void)0; })
 #       define Atomic_AddI32(variable, value)   __sync_add_and_fetch(&(variable), value)
 #       define Atomic_SubI32(variable, value)   __sync_sub_and_fetch(&(variable), value)
 #   endif
@@ -18,7 +18,7 @@
 #   define WIN32_LEAN_AND_MEAN
 #   include <Windows.h>
 #   define Atomic_GetI32(variable)              InterlockedExchange((volatile long*)&(variable), 0)
-#   define Atomic_SetI32(variable, value)       InterlockedExchange((volatile long*)&(variable), (value))
+#   define Atomic_SetI32(variable, value)       InterlockedExchange((volatile long*)&(variable), (value)); (void)0
 #   define Atomic_AddI32(variable, value)       InterlockedExchange((volatile long*)&(variable), (variable) + value) 
 #   define Atomic_SubI32(variable, value)       InterlockedExchange((volatile long*)&(variable), (variable) - value)
 #elif defined(__STDC_VERSION_) && (__STDC_VERSION_ >= 201112L)
