@@ -29,7 +29,7 @@ const char* String_New(const char* source)
     if (String_IsHeap(source))
     {
         StringBuffer* buffer = (StringBuffer*)(source - sizeof(StringBuffer));
-        Atomic_AddI32(buffer->memref, 1);
+        Atomic_AddI32(&buffer->memref, 1);
         return source;
     }
 
@@ -56,7 +56,7 @@ void String_Free(const char* target)
     {
         StringBuffer* buffer = (StringBuffer*)(target - sizeof(StringBuffer));
         
-        int memref = Atomic_SubI32(buffer->memref, 1);
+        int memref = Atomic_SubI32(&buffer->memref, 1);
         if (memref <= 0)
         {
             Memory_GeneralFree(buffer);
