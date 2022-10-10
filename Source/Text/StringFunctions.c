@@ -15,6 +15,8 @@ StringBuffer* StringBuffer_New(int32_t length)
     assert(buffer != NULL && "Cannot create new buffer, maybe the system have been out of memory.");
 
     buffer->length = length;
+    buffer->capacity = length + 1;
+
     buffer->memref = 1;
     buffer->memtag = STRING_MEMTAG_HEAP;
     return buffer;

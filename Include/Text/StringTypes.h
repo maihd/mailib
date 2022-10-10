@@ -3,14 +3,19 @@
 #include <stdint.h>
 #include <Meta/Keywords.h>
 
-constexpr uint64_t STRING_MEMTAG_HEAP = 0xa020b127788efe8fULL;
-constexpr uint64_t STRING_MEMTAG_WEAK = 0xb64c61277893498fULL;
+constexpr uint32_t STRING_MEMTAG_HEAP = 0xac8b19d1U;
+constexpr uint32_t STRING_MEMTAG_WEAK = 0x2e9497f4U;
 
+/// StringBuffer
+/// @note: make sure StringBuffer is 16bytes aligned
 typedef struct StringBuffer
 {
-    uint64_t    memtag;
+    uint32_t    memtag;
     int32_t     memref;
+
     int32_t     length;
+    int32_t     capacity;
+
     char        data[];
 } StringBuffer;
 
