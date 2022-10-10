@@ -141,33 +141,4 @@ const char* String_FormatBufferArgv(void* buffer, int32_t bufferSize, const char
     return stringBuffer->data;
 }
 
-int32_t String_Length(const char* target)
-{
-    assert(target != nullptr && "Attempt to use null-pointer on string");
-
-    if (String_IsSmart(target))
-    {
-        StringBuffer* buffer = (StringBuffer*)(target - sizeof(StringBuffer));
-        return buffer->length;
-    }
-    else
-    {
-        return (int)strlen(target);
-    }
-}
-
-const StringBuffer* String_GetBuffer(const char* target)
-{
-    assert(target != nullptr && "Attempt to use null-pointer on string");
-
-    if (String_IsSmart(target))
-    {
-        return (StringBuffer*)(target - sizeof(StringBuffer));
-    }
-    else
-    {
-        return nullptr;
-    }
-}
-
 //! LEAVE AN EMPTY LINE HERE, REQUIRE BY GCC/G++
