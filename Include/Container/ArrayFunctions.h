@@ -34,6 +34,33 @@ inline bool Array_EnsureSize(const Array<T>* array, int32_t size)
 }
 
 template <typename T>
+inline Array<T>* Array_EnsureSizeOrNew(Array<T>* array, int32_t size)
+{
+    if (array.capacity >= size)
+    {
+        return array;
+    }
+    else
+    {
+        int32_t   newCapacity   = size;
+        Array<T>* newArray      = Array_New<T>(array->allocator, newCapacity);
+        
+        if (newArray)
+        {
+            newArray->count = array->count;
+            memcpy(newArray->elements, array->elements, array->count * sizeof(T));
+            Array_Free(array);
+
+            return newArray;
+        }
+        else
+        {
+            return array;
+        }
+    }
+}
+
+template <typename T>
 inline void Array_Push(Array<T>* array, const T& value)
 {
     assert(array != nullptr);
@@ -54,6 +81,15 @@ inline void Array_Clear(Array<T>* array)
 {
     assert(array != nullptr);
     array->count = 0;
+}
+
+template <typename T>
+inline Array<T>* Array_Append(Array<T>* array, const T& value)
+{
+    assert(array != nullptr);
+    Array<T>* newArray = Array_EnsureSizeOrNew(array, array->count + 1))
+    Array_Push(newArray, value);
+    return newArray;
 }
 
 //! LEAVE AN EMPTY LINE HERE, REQUIRE BY GCC/G++
