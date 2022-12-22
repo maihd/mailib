@@ -1,8 +1,8 @@
-#include <Misc/Testing.h>
+#include <misc/testing.h>
 
 int main(const char* argv[], int argc)
 {
-    return Testing_RunAllCases(argv, argc);
+    return testing_run_all_cases(argv, argc);
 }
 
 //! LEAVE AN EMPTY LINE HERE, REQUIRE BY GCC/G++

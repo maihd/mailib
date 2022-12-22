@@ -1,7 +1,7 @@
-local MaiLib = require("premake5.mailib")
+local mailib = require("mailib.premake5")
 
 local ROOT_DIR = path.getabsolute(".")
-local BUILD_DIR = path.join(ROOT_DIR, "Projects")
+local BUILD_DIR = path.join(ROOT_DIR, "projects")
 
 local function filedirs(dirs)
     for _, directory in ipairs(dirs) do
@@ -13,31 +13,31 @@ local function filedirs(dirs)
     end
 end
 
-workspace "MaiLib"
+workspace "mailib"
 do
     language "C++"
-    location (path.join(BUILD_DIR, _ACTION:upper()))
+    location (path.join(BUILD_DIR, _ACTION))
 
     configurations { "Debug", "Release" }
     platforms { "x32", "x64" }
 
-    MaiLib.cflags();
+    mailib.cflags();
 
     filter {}
 end
 
-project "MaiLib_UnitTests"
+project "mailib_unit_tests"
 do
     kind "ConsoleApp"
 
     -- Add MaiLib files
-    MaiLib.files(ROOT_DIR)
-    MaiLib.links(ROOT_DIR)
-    MaiLib.includedirs(ROOT_DIR)
+    mailib.files(ROOT_DIR)
+    mailib.links(ROOT_DIR)
+    mailib.includedirs(ROOT_DIR)
 
     filedirs {
-        path.join(ROOT_DIR, "Tests"),
-        path.join(ROOT_DIR, "Tests/**")
+        path.join(ROOT_DIR, "tests"),
+        path.join(ROOT_DIR, "tests/**")
     }
 
     filter {}

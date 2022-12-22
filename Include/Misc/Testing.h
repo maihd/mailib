@@ -24,6 +24,6 @@ struct TestCase
     void TEST_CASE_FN_ ## __LINE__(void)
 
 /// Run all unit test cases
-int Testing_RunAllCases(const char* argv[], int argc);
+int testing_run_all_cases(const char* argv[], int argc);
 
 //! LEAVE AN EMPTY LINE HERE, REQUIRE BY GCC/G++
